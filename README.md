@@ -26,3 +26,15 @@
 #   导出数据 导入数据
 #   python manage.py dumpdata appname > appname.json
 #   python manage.py loaddata appname.json
+
+
+#   python manage.py collectstatic
+
+
+
+命令行
+    sudo /etc/init.d/nginx start
+
+    uwsgi --ini ~/uftp/MyDjango/MyDjango_uwsgi.ini
+
+    sudo vim /etc/nginx/sites-enabled/MyDjango

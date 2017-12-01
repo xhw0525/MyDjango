@@ -3,13 +3,7 @@
   <component name="RemoteMappingsManager">
     <list>
       <list>
-        <remote-mappings server-id="python@ssh://uxhw@192.168.11.80:22/usr/bin/python">
-          <settings>
-            <list>
-              <mapping local-root="$PROJECT_DIR$" remote-root="/home/uxhw/uftp/MyDjango" />
-            </list>
-          </settings>
-        </remote-mappings>
+        <remote-mappings server-id="python@ssh://uxhw@192.168.11.80:22/usr/bin/python" />
       </list>
     </list>
   </component>
