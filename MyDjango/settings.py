@@ -20,11 +20,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'd9n!%x)5@%(j032f(oqmo@7*^z%-wo@7$-30g8x&9$aib+9vgu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -77,15 +77,12 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static_root")
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static_fiels")]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static_files"),
+                    # '/var/www/static/',
+                    ]
 
-TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
-
-#DEBUG = False
-#ALLOWED_HOSTS = ['*']
