@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+import settings
 
 urlpatterns = patterns('',
     # Examples:
@@ -8,5 +9,6 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include('booktest.urls')),
-
+    url(r'^staticroot/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATIC_ROOT}),
+    url(r'^staticfiels/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATICFILES_DIRS}),
 )
