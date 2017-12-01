@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include('booktest.urls')),
     url(r'^staticroot/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATIC_ROOT}),
-    url(r'^staticfiels/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATICFILES_DIRS}),
+    url(r'^staticfiels/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATICFILES_DIRS[0]}),
+    url(r'^', include('booktest.urls')),
 )
