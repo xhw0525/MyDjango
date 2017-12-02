@@ -16,17 +16,26 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-import django
 import settings
+import django
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('booktest.urls')),
-    #这样加静态路径后自带服务器调试时   浏览器可以直接访问静态路径下的资源 仅限(CSS, JavaScript, Images)
+    #这样加静态路径后自带服务器调试时   浏览器可以直接访问静态路径下的资源 仅限(CSS, JavaScript, Images) //建议使用下面+号拼接的方式
     # url(r'^staticroot/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATIC_ROOT}),
     # url(r'^staticfiles/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATICFILES_DIRS[0]}),
-    url(r'^static/(?P<path>.*)$', django.views.static.serve,{'document_root': settings.STATIC_ROOT}),
-
+    # url(r'^static1/(?P<path>.*)$', django.views.static.serve,{'document_root': settings.STATIC_ROOT}),
 ]
 
 
+
+# 这样加静态路径后自带服务器调试时   浏览器可以直接访问静态路径下的资源 貌似仅限(CSS, JavaScript, Images)
+if settings.DEBUG:
+    urlpatterns += static("static", document_root=settings.STATIC_ROOT)
+    urlpatterns += static("media", document_root=settings.MEDIA_ROOT)
+else:
+    urlpatterns += static("static", document_root=settings.STATIC_ROOT)
+    urlpatterns += static("media", document_root=settings.MEDIA_ROOT)

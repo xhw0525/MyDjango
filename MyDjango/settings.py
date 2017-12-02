@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for MyDjango project.
 
@@ -25,7 +26,8 @@ SECRET_KEY = '+&_1novz_lfho8ujb1tq!p2)dk&w=7xmt&^fxome2(ohlk%kv!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#允许的主机名
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -55,7 +57,9 @@ ROOT_URLCONF = 'MyDjango.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,10 +122,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-STATIC_URL = '/static/'
+##这个如果设为"/static/" url.py中也设为'static' 会造成自带服务器无法直接访问静态网页的问题
+STATIC_URL = '/static_url/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),
 #                     # os.path.join(BASE_DIR, "static_files"),
 #                     ]
 
+MEDIA_URL = '/media_url/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')

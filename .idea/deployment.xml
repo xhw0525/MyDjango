@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData">
+  <component name="PublishConfigData" autoUpload="Always" serverName="windows" exclude=".svn;.cvs;.idea;.DS_Store;.git;.hg;.git*;db.sqlite3;">
     <serverData>
-      <paths name="Windows">
+      <paths name="windows">
         <serverdata>
           <mappings>
             <mapping deploy="/MyDjango" local="$PROJECT_DIR$" web="/" />
@@ -10,5 +10,6 @@
         </serverdata>
       </paths>
     </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>

@@ -1,5 +1,8 @@
 # MyDjango
 
+# 新建项目
+# python manage.py startproject project_name
+
 # 新建app
 # python manage.py startapp app_name
 
@@ -28,17 +31,13 @@
 #   python manage.py loaddata appname.json
 
 
+
+命令行 ngnix uwsgi django组合
 #   python manage.py collectstatic
+#   sudo /etc/init.d/nginx start
+#   uwsgi --ini ~/uftp/MyDjango/MyDjango_uwsgi.ini
+#   编辑网站站点
+#   sudo vim /etc/nginx/sites-enabled/myngnix_site
 
 
-
-命令行
-    sudo /etc/init.d/nginx start
-
-    uwsgi --ini ~/uftp/MyDjango/MyDjango_uwsgi.ini
-
-    sudo vim /etc/nginx/sites-enabled/MyDjango
-
-
-
-    Ubuntu Python 2.7.9  django 1.7.6
+pip查询    pip list --format=columns
