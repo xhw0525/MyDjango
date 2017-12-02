@@ -2,12 +2,12 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="2a0ed770-7b5d-467b-ad4f-62ec5b9ebb71" name="ubuntu" url="http://192.168.11.80">
-        <fileTransfer host="192.168.11.80" port="22" accessType="SFTP">
+      <webServer id="53b166ac-273b-4196-aa88-95ac56d19209" name="Windows" url="http://47.93.191.27">
+        <fileTransfer host="47.93.191.27" port="21">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>
-          <option name="port" value="22" />
+          <option name="port" value="21" />
         </fileTransfer>
       </webServer>
     </option>

@@ -38,3 +38,7 @@
     uwsgi --ini ~/uftp/MyDjango/MyDjango_uwsgi.ini
 
     sudo vim /etc/nginx/sites-enabled/MyDjango
+
+
+
+    Ubuntu Python 2.7.9  django 1.7.6
