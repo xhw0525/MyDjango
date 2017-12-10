@@ -41,3 +41,6 @@
 
 
 pip查询    pip list --format=columns
+
+
+ python manage.py makemigrations --empty myapp
