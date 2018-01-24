@@ -44,3 +44,6 @@ pip查询    pip list --format=columns
 
 
  python manage.py makemigrations --empty myapp
+
+scp指定端口
+sudo scp -P 29152 -r /Users/xhw/Downloads/pip-9.0.1.tar.gz  xhw@176.122.128.5:/home/xhw
