@@ -1,5 +1,5 @@
 #!/bin/sh
-NAME="MyDjango_uwsgi"
+NAME="uwsgi_ubuntu"
 if [ ! -n "$NAME" ];then
     echo "no arguments"
     exit;
@@ -14,6 +14,6 @@ do
 kill -9 $id
 echo "kill $id"
 done
-echo  "等5秒后执行下一条"
-sleep 5
-uwsgi --ini /home/uxhw/MyDjango/MyDjango_uwsgi.ini
+echo  "等3秒后执行下一条"
+sleep 3
+uwsgi --ini /home/uxhw/MyDjango/uwsgi_ubuntu.ini

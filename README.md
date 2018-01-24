@@ -46,7 +46,15 @@ pip查询    pip list --format=columns
  python manage.py makemigrations --empty myapp
 
 scp指定端口
-sudo scp -P 29152 -r /Users/xhw/Downloads/pip-9.0.1.tar.gz  xhw@176.122.128.5:/home/xhw
+sudo scp -P 26897 -r /Users/xhw/Downloads/pip-9.0.1.tar.gz  xhw@176.122.128.5:/home/xhw
+
+
+Ubuntu 取消 Apache及Nginx等开机自启动
+1、   sudo update-rc.d -f nginx remove 删除nginx随机器启动的服务
+ 　　sudo update-rc.d -f apache2 remove 删除apache2随机器启动的服务
+
+2、 查看/etc/rc2.d/里面的apache和nginx启动脚本，通常都是【一个英文字母 + 两个阿拉伯数字 + 脚本名称】。
+    英文字母是S的都是会自动启动的，K则相反。所以只要找到apache和nginx的启动脚本，把S改成K就可以了。
 
 
 ubuntu安装完Nginx后，文件结构大致为：
@@ -59,9 +67,7 @@ sudo /etc/init.d/nginx stop     # 停止
 sudo /etc/init.d/nginx restart  # 重启
 
 uwsgi --ini MyDjango_uwsgi.ini
-uwsgi --ini uwsgi.ini             # 启动
-uwsgi --reload uwsgi.pid          # 重启
-uwsgi --stop uwsgi.pid            # 关闭
+./reload_uwsgi.sh  #自己脚本  用于重启uwsgi
 
 
 收集Django静态文件
