@@ -14,5 +14,6 @@ do
 kill -9 $id
 echo "kill $id"
 done
-echo  "此处是不是该输出点什么"
+echo  "等5秒后执行下一条"
+sleep 5
 uwsgi --ini /home/uxhw/MyDjango/MyDjango_uwsgi.ini
