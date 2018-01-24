@@ -47,3 +47,28 @@ pip查询    pip list --format=columns
 
 scp指定端口
 sudo scp -P 29152 -r /Users/xhw/Downloads/pip-9.0.1.tar.gz  xhw@176.122.128.5:/home/xhw
+
+
+ubuntu安装完Nginx后，文件结构大致为：
+　　所有的配置文件都在 /etc/nginx下；
+　　启动程序文件在 /usr/sbin/nginx下；
+　　日志文件在 /var/log/nginx/下，分别是access.log和error.log；
+　　并且在 /etc/init.d下创建了启动脚本nginx
+sudo /etc/init.d/nginx start    # 启动
+sudo /etc/init.d/nginx stop     # 停止
+sudo /etc/init.d/nginx restart  # 重启
+
+uwsgi --ini MyDjango_uwsgi.ini
+uwsgi --ini uwsgi.ini             # 启动
+uwsgi --reload uwsgi.pid          # 重启
+uwsgi --stop uwsgi.pid            # 关闭
+
+
+收集Django静态文件
+把Django自带的静态文件收集到同一个static中，不然访问Django的admin页面会找不到静态文件。在django的setting文件中，添加下面一行内容：
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+然后到项目目录下执行:
+python manage.py collectstatic
+修改配置文件
+DEBUG = False
+ALLOWED_HOSTS = ['*']
