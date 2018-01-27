@@ -1,4 +1,17 @@
 ##
+
+#默认
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server ipv6only=on;
+	root /usr/share/nginx/html;
+	index index.html index.htm;
+	server_name localhost;
+	location / {
+		try_files $uri $uri/ =404;
+	}
+}
+#MyDjango
 server {
     listen 8081;
     listen [::]:8081;
@@ -29,9 +42,24 @@ server {
     }
 }
 
+#gogs
+server {
+    server_name localhost;
+    listen 8082;
+    # 或者 443，如果你使用 HTTPS 的话
+    # ssl on; 是否启用加密连接
+    # 如果你使用 HTTPS，还需要填写 ssl_certificate 和 ssl_certificate_key
+    location / {
+    # 如果你希望通过子路径访问，此处修改为子路径，注意以 / 开头并以 / 结束
+        proxy_pass http://localhost:3000/;
+    }
+}
 
 
 ################################################以下是试例
+
+
+
 # You may add here your
 # server {
 #	...
@@ -144,3 +172,51 @@ server {
 #		try_files $uri $uri/ =404;
 #	}
 #}
+
+##########################################################
+
+##下方代码开启https#
+#server {
+#    listen  80;
+#    server_name  localhost;
+#    # force redirect http to https
+#    rewrite ^ https://$http_host$request_uri? permanent;
+#    #return 301 https://$http_host$request_uri;
+#    }
+#server {
+#	listen 443 ssl;
+#	server_name localhost;
+#
+#	root html;
+#	index index.html index.htm;
+#
+##	ssl on;
+#	ssl_certificate /etc/nginx/ssl/nginx.crt;
+#	ssl_certificate_key /etc/nginx/ssl/nginx.key;
+#
+#	ssl_session_timeout 5m;
+##
+##	ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+##	ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
+##	ssl_prefer_server_ciphers on;
+##
+#
+#
+#	location / {
+#		# First attempt to serve request as file, then
+#		# as directory, then fall back to displaying a 404.
+#		try_files $uri $uri/ =404;
+#		# Uncomment to enable naxsi on this location
+#		# include /etc/nginx/naxsi.rules
+#	}
+#
+#    keepalive_timeout   70;
+#    server_tokens off; #隐藏nginx版本号
+#
+#    #强制用 HTTPS 访问?
+#    #add_header Strict-Transport-Security "max-age=31536000; includeSubdomains";
+#    #不知道下面2句啥用
+#    #fastcgi_param   HTTPS               on;
+#    #fastcgi_param   HTTP_SCHEME         https;
+#
+#    }

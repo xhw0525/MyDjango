@@ -48,7 +48,6 @@ pip查询    pip list --format=columns
 scp指定端口
 sudo scp -P 26897 -r /Users/xhw/Downloads/pip-9.0.1.tar.gz  xhw@176.122.128.5:/home/xhw
 
-
 Ubuntu 取消 Apache及Nginx等开机自启动
 1、   sudo update-rc.d -f nginx remove 删除nginx随机器启动的服务
  　　sudo update-rc.d -f apache2 remove 删除apache2随机器启动的服务
