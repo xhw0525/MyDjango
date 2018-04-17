@@ -123,7 +123,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 ##这个如果设为"/static/" url.py中也设为'static' 会造成自带服务器无法直接访问静态网页的问题
-STATIC_URL = '/static_url/'
+# STATIC_URL = '/static_url/'
+STATIC_URL = '/static/'
+
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),

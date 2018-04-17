@@ -1,9 +1,18 @@
 ##
 
+#鑫彩
+server {
+    listen  80;
+    server_name www.letgotry.site letgotry.site ;
+    root /home/uxhw/xinload;
+	index index.html;
+
+}
+
 #默认
 server {
-	listen 80 default_server;
-	listen [::]:80 default_server ipv6only=on;
+	listen 80 ;
+	listen [::]:80  ipv6only=on;
 	root /usr/share/nginx/html;
 	index index.html index.htm;
 	server_name localhost;
@@ -11,6 +20,9 @@ server {
 		try_files $uri $uri/ =404;
 	}
 }
+
+
+
 #MyDjango
 server {
     listen 8081;

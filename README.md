@@ -16,6 +16,11 @@
 #   1.创建更改的文件 2.将生成的更改的文件应用到数据库
 #   python manage.py makemigrations
 #   python manage.py migrate
+or
+先 python manage.py makemigrations [appname]
+再 python manage.py migrate [appname]
+
+
 
 #   创建超级管理员
 #   python manage.py createsuperuser
