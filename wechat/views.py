@@ -49,7 +49,7 @@ def autoreply(request):
         fromUser = ToUserName
 
         if msg_type == 'text':
-            content = "您好,欢迎来到Python大学习!希望我们可以一起进步!"
+            content = "欢迎您的到来!此公众号暂时还没添加功能! by:xhw"
             replyMsg = TextMsg(toUser, fromUser, content)
             print "接收消息成功了!!!!!!"
             print replyMsg
