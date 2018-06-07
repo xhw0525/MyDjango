@@ -5,7 +5,8 @@ import json
 from django.utils.encoding import smart_str
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
-
+import time
+import xml.etree.ElementTree as ET
 #django默认开启csrf防护，这里使用@csrf_exempt去掉防护
 @csrf_exempt
 def weixin_main(request):
@@ -31,7 +32,7 @@ def weixin_main(request):
         return HttpResponse(othercontent)
 
 #微信服务器推送消息是xml的，根据利用ElementTree来解析出的不同xml内容返回不同的回复信息，就实现了基本的自动回复功能了，也可以按照需求用其他的XML解析方法
-import xml.etree.ElementTree as ET
+
 def autoreply(request):
     try:
         webData = request.body
@@ -50,7 +51,7 @@ def autoreply(request):
         if msg_type == 'text':
             content = "您好,欢迎来到Python大学习!希望我们可以一起进步!"
             replyMsg = TextMsg(toUser, fromUser, content)
-            print "成功了!!!!!!!!!!!!!!!!!!!"
+            print "接收消息成功了!!!!!!"
             print replyMsg
             return replyMsg.send()
 
@@ -91,7 +92,7 @@ class Msg(object):
         self.MsgType = xmlData.find('MsgType').text
         self.MsgId = xmlData.find('MsgId').text
 
-import time
+
 class TextMsg(Msg):
     def __init__(self, toUserName, fromUserName, content):
         self.__dict = dict()
