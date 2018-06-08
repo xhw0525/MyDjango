@@ -33,8 +33,8 @@ server {
 #    root /var/www/example.com;
 #    index index.html;
 
-    access_log      /home/uxhw/log/nginx/MyDjango_access.log;
-    error_log       /home/uxhw/log/nginx/MyDjango_error.log;
+    access_log      /home/xhw/log/nginx/MyDjango_access.log;
+    error_log       /home/xhw/log/nginx/MyDjango_error.log;
 
     client_max_body_size 75M;
 
@@ -47,10 +47,10 @@ server {
         expires 30d;
         autoindex on;
         add_header Cache-Control private;
-        alias /home/uxhw/MyDjango/static/;
+        alias /home/xhw/MyDjango/static/;
      }
     location /media {
-        alias /home/uxhw/MyDjango/media/;
+        alias /home/xhw/MyDjango/media/;
     }
 }
 

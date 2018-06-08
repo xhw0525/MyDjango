@@ -7,6 +7,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 import time
 import xml.etree.ElementTree as ET
+import urllib2
+
+
+TOKEN = "xhw" #微信token
+
+
 #django默认开启csrf防护，这里使用@csrf_exempt去掉防护
 @csrf_exempt
 def weixin_main(request):
@@ -16,10 +22,9 @@ def weixin_main(request):
         timestamp = request.GET.get('timestamp', None)
         nonce = request.GET.get('nonce', None)
         echostr = request.GET.get('echostr', None)
-        #服务器配置中的token
-        token = 'xhw'
+
         #把参数放到list中排序后合成一个字符串，再用sha1加密得到新的字符串与微信发来的signature对比，如果相同就返回echostr给服务器，校验通过
-        hashlist = [token, timestamp, nonce]
+        hashlist = [TOKEN, timestamp, nonce]
         hashlist.sort()
         hashstr = ''.join([s for s in hashlist])
         hashstr = hashlib.sha1(hashstr).hexdigest()
@@ -42,47 +47,76 @@ def autoreply(request):
         ToUserName = xmlData.find('ToUserName').text
         FromUserName = xmlData.find('FromUserName').text
         CreateTime = xmlData.find('CreateTime').text
-        MsgType = xmlData.find('MsgType').text
+        requestContent = xmlData.find('Content').text
         MsgId = xmlData.find('MsgId').text
+        print  '接收消息成功了---->>>>',requestContent
 
         toUser = FromUserName
         fromUser = ToUserName
-
         if msg_type == 'text':
-            content = "欢迎您的到来!此公众号暂时还没添加功能! by:xhw"
-            replyMsg = TextMsg(toUser, fromUser, content)
-            print "接收消息成功了!!!!!!"
+            if requestContent.startswith('#'):
+                responseContent = getMsgFromTuLing(requestContent.replace('#','',1),msg_type)
+            else:
+                responseContent = "消息已收到,谢谢"
+            print '回复消息---->>>>',responseContent
+            replyMsg = TextMsg(toUser, fromUser, responseContent)
             print replyMsg
             return replyMsg.send()
 
         elif msg_type == 'image':
-            content = "图片已收到,谢谢"
-            replyMsg = TextMsg(toUser, fromUser, content)
+            responseContent = "图片已收到,谢谢"
+            replyMsg = TextMsg(toUser, fromUser, responseContent)
             return replyMsg.send()
         elif msg_type == 'voice':
-            content = "语音已收到,谢谢"
-            replyMsg = TextMsg(toUser, fromUser, content)
+            responseContent = "语音已收到,谢谢"
+            replyMsg = TextMsg(toUser, fromUser, responseContent)
             return replyMsg.send()
         elif msg_type == 'video':
-            content = "视频已收到,谢谢"
-            replyMsg = TextMsg(toUser, fromUser, content)
+            responseContent = "视频已收到,谢谢"
+            replyMsg = TextMsg(toUser, fromUser, responseContent)
             return replyMsg.send()
         elif msg_type == 'shortvideo':
-            content = "小视频已收到,谢谢"
-            replyMsg = TextMsg(toUser, fromUser, content)
+            responseContent = "小视频已收到,谢谢"
+            replyMsg = TextMsg(toUser, fromUser, responseContent)
             return replyMsg.send()
         elif msg_type == 'location':
-            content = "位置已收到,谢谢"
-            replyMsg = TextMsg(toUser, fromUser, content)
+            responseContent = "位置已收到,谢谢"
+            replyMsg = TextMsg(toUser, fromUser, responseContent)
             return replyMsg.send()
         else:
             msg_type == 'link'
-            content = "链接已收到,谢谢"
-            replyMsg = TextMsg(toUser, fromUser, content)
+            responseContent = "链接已收到,谢谢"
+            replyMsg = TextMsg(toUser, fromUser, responseContent)
             return replyMsg.send()
 
     except Exception, Argment:
         return Argment
+
+def getMsgFromTuLing(content,msg_type):
+    try:
+        urlStr = "http://openapi.tuling123.com/openapi/api/v2"
+        jsonDic = {}
+        jsonDic['reqType'] = 0
+        jsonDic['perception'] = {'inputText':{'text':content}}
+        jsonDic['userInfo'] = {'apiKey':'343d2e8e1fae46de9f7964618085dd54','userId':'xhw0525'}
+        jsonstr = json.dumps(jsonDic)
+        req = urllib2.Request(urlStr,jsonstr,{'Content-Type':'application/json'})
+        f = urllib2.urlopen(req).read()
+        resultDic = json.loads(f)
+        try:
+            string = ''
+            for res in resultDic[u'results']:
+                if res[u'resultType'] == u'text':
+                    string+=res[u'values'][u'text'].encode('utf-8')
+                if res[u'resultType'] == u'image':
+                    pass
+            return string
+        except:
+            return '图灵转码失败'
+    except:
+        return '图灵获取失败'
+        pass
+
 
 class Msg(object):
     def __init__(self, xmlData):
