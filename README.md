@@ -38,6 +38,8 @@ or
 
 
 命令行 ngnix uwsgi django组合
+
+#   收集静态文件
 #   python manage.py collectstatic
 #   sudo /etc/init.d/nginx start
 #   uwsgi --ini ~/uftp/MyDjango/MyDjango_uwsgi.ini

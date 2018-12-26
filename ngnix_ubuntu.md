@@ -33,8 +33,8 @@ server {
 #    root /var/www/example.com;
 #    index index.html;
 
-    access_log      /home/xhw/log/nginx/MyDjango_access.log;
-    error_log       /home/xhw/log/nginx/MyDjango_error.log;
+    access_log      /home/xhw/log/nginx_MyDjango_access.log;
+    error_log       /home/xhw/log/nginx_MyDjango_error.log;
 
     client_max_body_size 75M;
 

@@ -19,6 +19,8 @@ import views
 
 urlpatterns = [
     url(r'^hello$/$', views.hello, name='hello'),
+    url(r'^login', views.login, name='login'),
+
     url('^$', views.hello, name=''),
 ]
 
