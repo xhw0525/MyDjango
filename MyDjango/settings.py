@@ -25,6 +25,7 @@ SECRET_KEY = '+&_1novz_lfho8ujb1tq!p2)dk&w=7xmt&^fxome2(ohlk%kv!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
 
 #允许的主机名
 ALLOWED_HOSTS = ['*']
