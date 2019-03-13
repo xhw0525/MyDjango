@@ -33,7 +33,7 @@ urlpatterns = [
 ]
 
 
-
+#1.5之后不用加?
 # # 这样加静态路径后自带服务器调试时   浏览器可以直接访问静态路径下的资源 貌似仅限(CSS, JavaScript, Images)
 # if settings.DEBUG:
 #     urlpatterns += static(u'static', document_root=settings.STATIC_ROOT)
