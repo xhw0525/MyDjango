@@ -5,6 +5,7 @@ from django.db import models
 
 # Create your models here.
 
+# noinspection PyInterpreter
 class MyInfo(models.Model):
     name = models.CharField(max_length=50)
     jiage = models.CharField(max_length=50)

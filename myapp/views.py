@@ -6,13 +6,19 @@ import time
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium import webdriver
+from models import BugTag
 
 # Create your views here.
 browser = None
+
+
 def hello(request):
+    # tags =BugTag(name='你好bug')
+    # tags.save()
+    names = BugTag.objects.get(id =1)
+    name = names.name
 
-    return render(request, 'hello.html',{'nihao':'你好啊啊啊'})
-
+    return render(request, 'hello.html', {'nihao': '你好啊啊啊' + name})
 
 # def login(request):
 #     global browser

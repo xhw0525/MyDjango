@@ -124,12 +124,30 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),
-#                     # os.path.join(BASE_DIR, "static_files"),
-#                     ]
+
+#设置的static file的起始url，这个只是在template里边引用到，这个参数和MEDIA_URL的含义相同。
+STATIC_URL = '/static/' #html中引用时 用到此url
+
+# 当运行 python manage.py collectstatic 的时候
+# STATIC_ROOT 文件夹 是用来将所有STATICFILES_DIRS中所有文件夹中的文件，以及各app中static中的文件都复制过来
+# 把这些文件放到一起是为了用apache等部署的时候更方便
+STATIC_ROOT = os.path.join(BASE_DIR, "collect_static")
+
+# 其它 存放静态文件的文件夹，可以用来存放项目中公用的静态文件，里面不能包含 STATIC_ROOT
+# 如果不想用 STATICFILES_DIRS 可以不用，都放在 app 里的 static 中也可以
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), #声明静态文件 文件夹位置
+                    # os.path.join(BASE_DIR, "static_files"),
+                    ]
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+)
+
+

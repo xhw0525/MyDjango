@@ -19,7 +19,7 @@ from django.contrib import admin
 import settings
 from django.views.generic.base import RedirectView
 from django.conf.urls.static import static
-
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -34,10 +34,10 @@ urlpatterns = [
 
 
 
-# 这样加静态路径后自带服务器调试时   浏览器可以直接访问静态路径下的资源 貌似仅限(CSS, JavaScript, Images)
-if settings.DEBUG:
-    urlpatterns += static("static", document_root=settings.STATIC_ROOT)
-    urlpatterns += static("media", document_root=settings.MEDIA_ROOT)
-else:
-    urlpatterns += static("static", document_root=settings.STATIC_ROOT)
-    urlpatterns += static("media", document_root=settings.MEDIA_ROOT)
+# # 这样加静态路径后自带服务器调试时   浏览器可以直接访问静态路径下的资源 貌似仅限(CSS, JavaScript, Images)
+# if settings.DEBUG:
+#     urlpatterns += static(u'static', document_root=settings.STATIC_ROOT)
+#     # urlpatterns += static(u'media', document_root=settings.MEDIA_ROOT)
+# else:
+#     urlpatterns += static(u'static', document_root=settings.STATIC_ROOT)
+#     # urlpatterns += static(u'media', document_root=settings.MEDIA_ROOT)
