@@ -64,7 +64,8 @@ centos:
 
 
 pip查询    pip list --format=columns
-
+国内源 
+pip install django==1.11  -i http://pypi.douban.com/simple --trusted-host pypi.douban.com 
 
  python manage.py makemigrations --empty myapp
 
