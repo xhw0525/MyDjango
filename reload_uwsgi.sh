@@ -1,5 +1,5 @@
 #!/bin/sh
-NAME="uwsgi_centos"
+NAME="uwsgi_ubuntu"
 if [ ! -n "$NAME" ];then
     echo "no arguments"
     exit;
@@ -16,4 +16,4 @@ echo "kill $id"
 done
 echo  "3秒后启动."
 sleep 3
-uwsgi --ini /home/xhw/MyDjango/uwsgi_centos.ini
+uwsgi --ini /home/uxhw/MyDjango/uwsgi_ubuntu.ini

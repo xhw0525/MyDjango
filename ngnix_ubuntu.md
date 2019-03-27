@@ -25,32 +25,29 @@ server {
 
 #MyDjango
 server {
-    listen 8081;
-    listen [::]:8081;
+    listen 80;
+    listen [::]:443;
     charset utf-8;
     server_name localhost;
-
-#    root /var/www/example.com;
-#    index index.html;
-
-    access_log      /home/xhw/log/nginx_MyDjango_access.log;
-    error_log       /home/xhw/log/nginx_MyDjango_error.log;
+    
+    access_log      /home/uxhw/log/nginx_MyDjango_access.log;
+    error_log       /home/uxhw/log/nginx_MyDjango_error.log;
 
     client_max_body_size 75M;
 
     location / {
         include uwsgi_params;
-        uwsgi_pass 127.0.0.1:1801;
+        uwsgi_pass 127.0.0.1:8001;
         uwsgi_read_timeout 5;
     }
     location /static {
         expires 30d;
         autoindex on;
         add_header Cache-Control private;
-        alias /home/xhw/MyDjango/static/;
+        alias /home/uxhw/MyDjango/static_root/;
      }
     location /media {
-        alias /home/xhw/MyDjango/media/;
+        alias /home/uxhw/MyDjango/media/;
     }
 }
 
