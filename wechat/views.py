@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 import time
 import xml.etree.ElementTree as ET
-import urllib2
+import urllib3
 
 
 TOKEN = "xhw" #微信token
@@ -49,7 +49,7 @@ def autoreply(request):
         CreateTime = xmlData.find('CreateTime').text
         requestContent = xmlData.find('Content').text
         MsgId = xmlData.find('MsgId').text
-        print  '接收消息成功了---->>>>',requestContent
+        print  ('接收消息成功了---->>>>',requestContent)
 
         toUser = FromUserName
         fromUser = ToUserName
@@ -58,9 +58,9 @@ def autoreply(request):
                 responseContent = getMsgFromTuLing(requestContent.replace('#','',1),msg_type)
             else:
                 responseContent = "消息已收到,谢谢"
-            print '回复消息---->>>>',responseContent
+            print ('回复消息---->>>>',responseContent)
             replyMsg = TextMsg(toUser, fromUser, responseContent)
-            print replyMsg
+            print (replyMsg)
             return replyMsg.send()
 
         elif msg_type == 'image':
@@ -89,7 +89,7 @@ def autoreply(request):
             replyMsg = TextMsg(toUser, fromUser, responseContent)
             return replyMsg.send()
 
-    except Exception, Argment:
+    except Exception as Argment:
         return Argment
 
 def getMsgFromTuLing(content,msg_type):
@@ -100,8 +100,8 @@ def getMsgFromTuLing(content,msg_type):
         jsonDic['perception'] = {'inputText':{'text':content}}
         jsonDic['userInfo'] = {'apiKey':'343d2e8e1fae46de9f7964618085dd54','userId':'xhw0525'}
         jsonstr = json.dumps(jsonDic)
-        req = urllib2.Request(urlStr,jsonstr,{'Content-Type':'application/json'})
-        f = urllib2.urlopen(req).read()
+        req = urllib3.Request(urlStr,jsonstr,{'Content-Type':'application/json'})
+        f = urllib3.urlopen(req).read()
         resultDic = json.loads(f)
         try:
             string = ''

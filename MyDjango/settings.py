@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'wechat',
+    # 'zxchat',
 ]
 
 MIDDLEWARE = [
@@ -136,7 +137,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static_root") #uwign时使用的是STATIC_
 
 # 其它 存放静态文件的文件夹，可以用来存放项目中公用的静态文件，里面不能包含 STATIC_ROOT
 # 如果不想用 STATICFILES_DIRS 可以不用，都放在 app 里的 static 中也可以
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static1"), #声明静态文件 文件夹位置
+
+#   运行前要先收集静态文件 python manage.py collectstatic
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), #声明静态文件 文件夹位置
                     # os.path.join(BASE_DIR, "media1"),
                     # os.path.join(BASE_DIR,"myapp", "static1"),
                     # os.path.join(BASE_DIR, "static_files"),
