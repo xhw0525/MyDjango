@@ -4,7 +4,8 @@ import json
 from django.http import HttpResponse
 from zxchat.models import ZXUserModel
 from django.views.decorators.csrf import csrf_exempt
-
+from django.core import serializers
+# 添加用户
 @csrf_exempt
 def adduser(request):
     json_data = formatRequestJson(request)
@@ -36,7 +37,7 @@ def adduser(request):
 
     return HttpResponse(formatResponseJson(msg='保存成功'))
 
-
+# 更新用户
 @csrf_exempt
 def updateuser(request):
     json_data = formatRequestJson(request)
@@ -60,9 +61,26 @@ def updateuser(request):
 
     return HttpResponse(formatResponseJson(msg='保存成功'))
 
+# 查询用户
+@csrf_exempt
+def getuser(request):
+    json_data = formatRequestJson(request)
+
+    username = json_data['username']
+
+    if username is None:
+        return HttpResponse(formatResponseJson(state=2, msg='用户名为空'))
+
+    users = ZXUserModel.objects.filter(username=username)
+
+    if len(users) == 0:
+        return HttpResponse(formatResponseJson(state=2, msg='用户不存在'))
+
+    return HttpResponse(formatResponseJson(data=users.first()))
 
 def formatResponseJson(msg='success', state=0, data=''):
-    mainDic = {'msg': msg, 'state': state, 'data': data}
+
+    mainDic = {'msg': msg, 'state': state, 'data': convert_to_dicts(data)}
 
     return json.dumps(mainDic, ensure_ascii=False)
 
@@ -81,3 +99,13 @@ def formatRequestJson(request):
         # print(json_data)
 
     return json_data
+
+
+
+#参考方法1： 简单版本
+def convert_to_dicts(objc):
+    dict = {}
+    dict.update(objc.__dict__)
+    dict.pop("_state", None)#去除掉多余的字段
+    return dict
+

@@ -20,6 +20,7 @@ import zxchat.views as views
 urlpatterns = [
     url(r'^adduser$', views.adduser, name='adduser'),
     url(r'^updateuser$', views.updateuser, name='updateuser'),
+    url(r'^getuser$', views.getuser, name='getuser'),
 
 ]
 
