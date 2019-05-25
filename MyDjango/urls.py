@@ -23,6 +23,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^zxchat/', include('zxchat.urls')),
+
     # url(r'^wx/', include('wechat.urls',namespace="wechat")),
     url(r'^app/', include('myapp.urls')),
     url(r'^', include('myapp.urls')),
