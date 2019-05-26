@@ -8,14 +8,14 @@ from zxchat.views import custom_page
 # Register your models here.
 
 class ZXUserModelAdmin(admin.ModelAdmin):
-    # listdisplay设置要显示在列表中的字段（id字段是Django模型的默认主键）
+    # 列表要显示在列表中的字段（id字段是Django模型的默认主键）
     list_display = ['username', 'phone', 'sex', 'signature', 'nickname', 'type',
-                    'status', 'ctime', 'mtime', 'activetime', 'is_service','isok' ]
-    # 直接激活
+                    'status', 'ctime', 'mtime', 'activetime', 'is_service', 'isok']
+    # 列表 直接激活编辑
     list_filter = ('is_service', 'status',)
 
-    # 还可以多个字段显示在一行。(比 list_display优先级高)
-    fields = ['username', 'phone', ('sex', 'signature'),'isok']
+    # 列表点进去后的编辑内容; 还可以多个字段显示在一行。
+    fields = ['username', 'phone', ('sex', 'signature'), ]
 
     # 那些字段能直接修改
     list_editable = ['activetime', ]
@@ -32,9 +32,6 @@ class ZXUserModelAdmin(admin.ModelAdmin):
         # ...
 
         return [f.name for f in self.model._meta.fields if (only_reads.__contains__(f.name))]
-
-
-
 
 
 admin.site.register(ZXUserModel, ZXUserModelAdmin)
