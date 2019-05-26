@@ -6,8 +6,8 @@ from myapp.models import *
 
 # Register your models here.
 
-class MyInfoAdmin(admin.ModelAdmin):
-    list_display = ['name', 'jiage', 'shijian']
-
-
-admin.site.register(MyInfo, MyInfoAdmin)
+# class MyInfoAdmin(admin.ModelAdmin):
+#     list_display = ['name', 'jiage', 'shijian']
+#
+#
+# admin.site.register(MyInfo, MyInfoAdmin)

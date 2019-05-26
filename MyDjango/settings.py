@@ -12,9 +12,18 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-
+from django.contrib import admin
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+admin.site.site_title = 'MD后台管理系统'
+# 放在每个管理页面末尾的<title>，默认情况下是“Django站点管理员”
+admin.site.site_header = 'MD后台管理系统'
+# 放在每个管理页面顶部的<h1>文本，默认情况下是“Django管理”
+admin.site.index_title = 'MD后台产品管理'
+# 管理员索引页面顶部的文本，默认情况下是“站点管理”
+# admin.site.site_url = ''
+# 管理页面顶部“查看网站”链接的URL，默认情况下是/，将其设置None将删除链接
 
 
 # Quick-start development settings - unsuitable for production

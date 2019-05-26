@@ -10,5 +10,6 @@ class ZXUserModelAdmin(admin.ModelAdmin):
     list_display = ['username', 'phone', 'sex', 'signature', 'year', 'head', 'nickname', 'type',
                     'status', 'ctime', 'mtime', 'stature', 'birthday', 'industry', 'education', 'is_service', ]
 
+
 admin.site.register(ZXUserModel, ZXUserModelAdmin)
 # admin.site.site_title='hahah'
