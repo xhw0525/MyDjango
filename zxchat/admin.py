@@ -11,20 +11,19 @@ class ZXUserModelAdmin(admin.ModelAdmin):
     # 列表要显示在列表中的字段（id字段是Django模型的默认主键）
     list_display = ['username', 'phone', 'sex', 'signature', 'nickname', 'type',
                     'status', 'ctime', 'mtime', 'activetime', 'is_service', 'isok']
-    # 列表 直接激活编辑
-    list_filter = ('is_service', 'status',)
 
     # 列表点进去后的编辑内容; 还可以多个字段显示在一行。
     fields = ['username', 'phone', ('sex', 'signature'), ]
 
-    # 那些字段能直接修改
+    # 列表 直接激活编辑
     list_editable = ['activetime', ]
     # list_per_page设置每页显示多少条记录，默认是100条
     list_per_page = 50
 
-    # 筛选器
-    # list_filter =('username', 'is_service',) #过滤器
-    search_fields = ('username', 'signature',)  # 搜索字段
+    # 右侧过滤器
+    list_filter = ('is_service', 'status',)
+    # 搜索字段
+    search_fields = ('username', 'signature',)
 
     def get_readonly_fields(self, request, obj=None):
         only_reads = ['username']
