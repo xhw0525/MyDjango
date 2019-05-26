@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 
 import json
 from django.http import HttpResponse
 from zxchat.models import ZXUserModel
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
 from django.core import serializers
 # 添加用户
 @csrf_exempt
@@ -109,3 +111,8 @@ def convert_to_dicts(objc):
     dict.pop("_state", None)#去除掉多余的字段
     return dict
 
+
+def custom_page(request):
+
+    theads = ['1111', '2222', '3333', '4444']
+    return render(request, 'custom_page.html', {"theads": theads, "trows": []})

@@ -37,3 +37,11 @@ class ZXUserModel(models.Model):
 
     # def __str__(self):
     #     return self.username.encode("utf-8")
+
+
+class CustomPageView(models.Model):
+    class Meta:
+        verbose_name = 'admin中跳转自定义的xx'
+        verbose_name_plural = verbose_name
+    pass
+
