@@ -16,83 +16,19 @@ from rest_framework.schemas import AutoSchema
 import coreapi
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API端：允许查看和编辑用户
-    list:
-        list方法的注释
-    create:
-        creat方法的注释
-    """
-    queryset = MyUserModel.objects.all().order_by('-ctime')
-    serializer_class = MyUserModelSerializer
-    parser_classes = (JSONParser,)
-
-    # def get_permissions(self):
-    #     if self.action in ('create',):
-    #         self.permission_classes = [IsAuthenticated]
-    #     return [permission() for permission in self.permission_classes]
-
-
-    #下面的方法有错误 仅仅可以参考结构,
-    # def list(self, request, **kwargs):
-    #     users = MyUserModel.objects.all()
-    #     serializer = MyUserModelSerializer(users, many=True)
-    #     return Response(serializer., status=status.HTTP_200_OK)
-    #
-    # @permission_classes(IsAuthenticated, )
-    # def create(self, request, **kwargs):
-    #     name = request.data.get('username')
-    #     serializer = MyUserModelSerializer(data=request.data)
-    #     print('------name--------------->', name)
-    #     jsondata = None
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         jsondata = serializer.validated_data
-    #     print('--------------------->', jsondata)
-    #     return Response(jsondata, status=status.HTTP_201_CREATED)
-
-    # @action(detail=False, methods=['post', ], )
-    # def getforusername(self, request, pk=None):
-    #     name = request.data.get('name', None)
-    #     if name:
-    #         users = MyUserModel.objects.filter(username=name).first()
-    #     return Response(users, status=status.HTTP_200_OK)
-
-
-class api_view_demo(APIView):
-    schema = AutoSchema(manual_fields=[
-        coreapi.Field(name="username", required=False, location="query", description="介绍出不来啊"),
-        coreapi.Field(name="phone", required=False, location="query", description="介绍出不来啊"),
-    ])
-
-    @action(detail=False, )
-    def get(self, request, *args, **kwargs):
-        """
-        发送信息到指定人员邮箱\r\n
-        参数列表：\r\n
-            from_email： 发件人邮箱\r\n
-            to_email: 收件人，多个收件人请使用英文逗号分隔隔开\r\n
-            subject: 邮件主题\r\n
-            message: 邮件正文\r\n
-        """
-        return Response('get请求')
-
-
 @api_view(['post'])
 @schema(AutoSchema(manual_fields=[
-    coreapi.Field(name="username", required=False, location="query", description='介绍出不来啊'),
-    coreapi.Field(name="age", ),
+    #location='query'加上后就拼接到了url上   #required=True 文档中当有location时才生效
+    coreapi.Field(name="username", type='string', description='*姓名', required=True),
+    coreapi.Field(name="age",type='integer', description='年龄'),
 ]))
 # @authentication_classes((SessionAuthentication, BasicAuthentication))
 # @permission_classes((IsAuthenticated,))
 def hello_world(request):
-    """
-    发送信息到指定人员邮箱\r\n
-    参数列表：\r\n
-        username： 姓名\r\n
-    """
-    return Response({"message": "Hello, world!"})
+    print('------------->',request.data,request.get_raw_uri())
+
+    """哈哈 这个是方法注释"""
+    return Response({"message": "Hello, world!%s"%(request.data.get('username',None)),})
 
 
 # 以下为非restframwork内容
