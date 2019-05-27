@@ -35,10 +35,14 @@ class UserViewSet(viewsets.ModelViewSet):
     @permission_classes(IsAuthenticated, )
     def create(self, request, **kwargs):
         name = request.data.get('username')
-        users = MyUserModel.objects.create(name=name)
-        serializer = MyUserModelSerializer(users)
-
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        serializer = MyUserModelSerializer(data=request.data)
+        print('------name--------------->', name)
+        jsondata = None
+        if serializer.is_valid():
+            serializer.save()
+            jsondata = serializer.validated_data
+        print('--------------------->', jsondata)
+        return Response(jsondata, status=status.HTTP_201_CREATED)
 
     @action(detail=False, methods=['post', ], )
     def getforusername(self, request, pk=None):
@@ -69,7 +73,7 @@ class api_view_demo(APIView):
 
 @api_view(['post'])
 @schema(AutoSchema(manual_fields=[
-    coreapi.Field(name="username", ),
+    coreapi.Field(name="username", required=False, location="query", description='介绍出不来啊'),
     coreapi.Field(name="age", ),
 ]))
 # @authentication_classes((SessionAuthentication, BasicAuthentication))
