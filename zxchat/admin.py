@@ -6,7 +6,6 @@ from zxchat.views import custom_page
 
 
 # Register your models here.
-
 class ZXUserModelAdmin(admin.ModelAdmin):
     # 列表要显示在列表中的字段（id字段是Django模型的默认主键）
     list_display = ['username', 'phone', 'sex', 'signature', 'nickname', 'type',
@@ -35,8 +34,6 @@ class ZXUserModelAdmin(admin.ModelAdmin):
 
 admin.site.register(ZXUserModel, ZXUserModelAdmin)
 
-
-# admin.site.site_title='hahah'
 
 
 @admin.register(ZXAutoReplyModel)

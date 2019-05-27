@@ -14,13 +14,21 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
 import zxchat.views as views
+from django.conf.urls import url, include
+from rest_framework import routers
 
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+
+# 使用自动化URL路由，转配我们的API.
+# 如有额外需要, 我也为可视化API添加了登陆URLs.
 urlpatterns = [
-    url(r'^adduser$', views.adduser, name='adduser'),
-    url(r'^updateuser$', views.updateuser, name='updateuser'),
-    url(r'^getuser$', views.getuser, name='getuser'),
+    # url(r'^adduser$', views.adduser, name='adduser'),
+    # url(r'^updateuser$', views.updateuser, name='updateuser'),
+    # url(r'^getuser$', views.getuser, name='getuser'),
+    url(r'^', include(router.urls)),
 
 ]
 
