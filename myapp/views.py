@@ -48,7 +48,7 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response(users, status=status.HTTP_200_OK)
 
 
-class ApiViewDemo(APIView):
+class api_view_demo(APIView):
     schema = AutoSchema(manual_fields=[
         coreapi.Field(name="username", required=False, location="query", description="介绍出不来啊"),
         coreapi.Field(name="phone", required=False, location="query", description="介绍出不来啊"),
@@ -69,17 +69,16 @@ class ApiViewDemo(APIView):
 
 @api_view(['post'])
 @schema(AutoSchema(manual_fields=[
-    coreapi.Field(name="phone", ),
-    coreapi.Field(name="gwae", ),
+    coreapi.Field(name="username", ),
+    coreapi.Field(name="age", ),
 ]))
+# @authentication_classes((SessionAuthentication, BasicAuthentication))
+# @permission_classes((IsAuthenticated,))
 def hello_world(request):
     """
     发送信息到指定人员邮箱\r\n
     参数列表：\r\n
-        from_email： 发件人邮箱\r\n
-        to_email: 收件人，多个收件人请使用英文逗号分隔隔开\r\n
-        subject: 邮件主题\r\n
-        message: 邮件正文\r\n
+        username： 姓名\r\n
     """
     return Response({"message": "Hello, world!"})
 

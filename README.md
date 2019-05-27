@@ -16,6 +16,10 @@
 #   1.创建更改的文件 2.将生成的更改的文件应用到数据库
 #   python manage.py makemigrations
 #   python manage.py migrate
+
+#   收集静态文件
+#   python manage.py collectstatic
+
 or
 先 python manage.py makemigrations [appname]
 再 python manage.py migrate [appname]
@@ -39,8 +43,7 @@ or
 
 命令行 ngnix uwsgi django组合
 
-#   收集静态文件
-#   python manage.py collectstatic
+
 #   sudo /etc/init.d/nginx start
 #   uwsgi --ini ~/uftp/MyDjango/MyDjango_uwsgi.ini
 #   编辑网站站点

@@ -30,12 +30,13 @@ urlpatterns = [
     # url(r'^updateuser$', views.updateuser, name='updateuser'),
     # url(r'^getuser$', views.getuser, name='getuser'),
     url(r'^', include(router.urls)),
-
-    url(r'^ApiViewDemo$', views.ApiViewDemo.as_view()),
+    url(r'^api_view_demo$', views.api_view_demo.as_view()),
     url(r'^hello_world$', views.hello_world, name='hello_world'),
 
+
     url(r'^docs/', include_docs_urls(title="myapp")),
-    url('^.*', views.hello, name=''),
+
 
 ]
+
 

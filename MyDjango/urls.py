@@ -21,6 +21,8 @@ from django.views.generic.base import RedirectView
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
+from myapp.views import hello
+
 
 admin.site.site_title = 'MD后台管理系统'
 # # 放在每个管理页面末尾的<title>，默认情况下是“Django站点管理员”
@@ -39,7 +41,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^app/', include('myapp.urls')),
     # url(r'^wx/', include('wechat.urls',namespace="wechat")),
-    url(r'^', include('myapp.urls')),
+    url('^.*', hello, name=''),
     # 这样加静态路径后自带服务器调试时   浏览器可以直接访问静态路径下的资源 仅限(CSS, JavaScript, Images) //建议使用下面+号拼接的方式
     # url(r'^staticroot/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATIC_ROOT}),
     # url(r'^staticfiles/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATICFILES_DIRS[0]}),
