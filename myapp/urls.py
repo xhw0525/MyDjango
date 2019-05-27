@@ -23,6 +23,12 @@ from rest_framework.documentation import include_docs_urls
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet) #集合视图使用这种路由
 
+from rest_framework.schemas import get_schema_view
+from rest_framework_swagger.renderers import SwaggerUIRenderer, OpenAPIRenderer
+schema_view = get_schema_view(title='Users API', renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer])
+
+
+
 # 使用自动化URL路由，转配我们的API.
 # 如有额外需要, 我也为可视化API添加了登陆URLs.
 urlpatterns = [
@@ -33,8 +39,8 @@ urlpatterns = [
     url(r'^api_view_demo$', views.api_view_demo.as_view()),
     url(r'^hello_world$', views.hello_world, name='hello_world'),
 
-
-    url(r'^docs/', include_docs_urls(title="myapp")),
+    url(r'^docs/', schema_view, name="docs"),
+    # url(r'^docs/', include_docs_urls(title="myapp")),
 
 
 ]

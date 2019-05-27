@@ -17,39 +17,47 @@ import coreapi
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    """API端：允许查看和编辑用户"""
+    """
+    API端：允许查看和编辑用户
+    list:
+        list方法的注释
+    create:
+        creat方法的注释
+    """
     queryset = MyUserModel.objects.all().order_by('-ctime')
     serializer_class = MyUserModelSerializer
     parser_classes = (JSONParser,)
 
-    def get_permissions(self):
-        if self.action in ('create',):
-            self.permission_classes = [IsAuthenticated]
-        return [permission() for permission in self.permission_classes]
+    # def get_permissions(self):
+    #     if self.action in ('create',):
+    #         self.permission_classes = [IsAuthenticated]
+    #     return [permission() for permission in self.permission_classes]
 
-    def list(self, request, **kwargs):
-        users = MyUserModel.objects.all()
-        serializer = MyUserModelSerializer(users, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
 
-    @permission_classes(IsAuthenticated, )
-    def create(self, request, **kwargs):
-        name = request.data.get('username')
-        serializer = MyUserModelSerializer(data=request.data)
-        print('------name--------------->', name)
-        jsondata = None
-        if serializer.is_valid():
-            serializer.save()
-            jsondata = serializer.validated_data
-        print('--------------------->', jsondata)
-        return Response(jsondata, status=status.HTTP_201_CREATED)
+    #下面的方法有错误 仅仅可以参考结构,
+    # def list(self, request, **kwargs):
+    #     users = MyUserModel.objects.all()
+    #     serializer = MyUserModelSerializer(users, many=True)
+    #     return Response(serializer., status=status.HTTP_200_OK)
+    #
+    # @permission_classes(IsAuthenticated, )
+    # def create(self, request, **kwargs):
+    #     name = request.data.get('username')
+    #     serializer = MyUserModelSerializer(data=request.data)
+    #     print('------name--------------->', name)
+    #     jsondata = None
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         jsondata = serializer.validated_data
+    #     print('--------------------->', jsondata)
+    #     return Response(jsondata, status=status.HTTP_201_CREATED)
 
-    @action(detail=False, methods=['post', ], )
-    def getforusername(self, request, pk=None):
-        name = request.data.get('name', None)
-        if name:
-            users = MyUserModel.objects.filter(username=name).first()
-        return Response(users, status=status.HTTP_200_OK)
+    # @action(detail=False, methods=['post', ], )
+    # def getforusername(self, request, pk=None):
+    #     name = request.data.get('name', None)
+    #     if name:
+    #         users = MyUserModel.objects.filter(username=name).first()
+    #     return Response(users, status=status.HTTP_200_OK)
 
 
 class api_view_demo(APIView):

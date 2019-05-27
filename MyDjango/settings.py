@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'myapp',
     'wechat',
     'rest_framework',
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [
@@ -149,6 +150,21 @@ STATICFILES_FINDERS = (
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
 
-
     # 'PAGE_SIZE': 10
+}
+# swagger 配置项
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        "basic": {
+            'type': 'basic'
+        }
+    },
+    'LOGIN_URL': 'rest_framework:login',
+    'LOGOUT_URL': 'rest_framework:logout',
+
+    'APIS_SORTER': 'alpha',
+    'JSON_EDITOR': True,
+    'OPERATIONS_SORTER': 'alpha',
+    'VALIDATOR_URL': None,
 }
