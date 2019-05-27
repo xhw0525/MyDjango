@@ -1,22 +1,13 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
-import json
-from django.http import HttpResponse
-from zxchat.models import ZXUserModel
-from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render
-from zxchat.serializers import ZXUserModelSerializer
-from rest_framework import viewsets, status
-
-
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API端：允许查看和编辑用户
-    """
-    queryset = ZXUserModel.objects.all().order_by('-ctime')
-    serializer_class = ZXUserModelSerializer
-
+# # -*- coding: utf-8 -*-
+# from __future__ import unicode_literals
+#
+# import json
+# from django.http import HttpResponse
+# from myapp.models import MyUserModel
+# from django.views.decorators.csrf import csrf_exempt
+# from django.shortcuts import render
+# from myapp.serializers import MyUserModelSerializer
+# from rest_framework import viewsets, status
 #
 # # 添加用户
 # @csrf_exempt
@@ -33,11 +24,11 @@ class UserViewSet(viewsets.ModelViewSet):
 #         return HttpResponse(formatResponseJson(state=2, msg='用户名为空'))
 #     print(username, password, phone, sex, signature, nickname)
 #     user = None
-#     users = ZXUserModel.objects.filter(username=username)
+#     users = MyUserModel.objects.filter(username=username)
 #     if len(users) > 0:
 #         return HttpResponse(formatResponseJson(state=2, msg='用户已存在'))
 #     else:
-#         user = ZXUserModel()
+#         user = MyUserModel()
 #
 #     user.username = username
 #     user.password = password
@@ -61,12 +52,12 @@ class UserViewSet(viewsets.ModelViewSet):
 #     if username is None:
 #         return HttpResponse(formatResponseJson(state=2, msg='用户名为空'))
 #
-#     users = ZXUserModel.objects.filter(username=username)
+#     users = MyUserModel.objects.filter(username=username)
 #
 #     if len(users) == 0:
 #         return HttpResponse(formatResponseJson(state=2, msg='用户不存在'))
 #
-#     user: ZXUserModel = users.first()
+#     user: MyUserModel = users.first()
 #
 #     for parm in json_data:
 #         setattr(user, parm, json_data[parm])
@@ -86,7 +77,7 @@ class UserViewSet(viewsets.ModelViewSet):
 #     if username is None:
 #         return HttpResponse(formatResponseJson(state=2, msg='用户名为空'))
 #
-#     users = ZXUserModel.objects.filter(username=username)
+#     users = MyUserModel.objects.filter(username=username)
 #
 #     if len(users) == 0:
 #         return HttpResponse(formatResponseJson(state=2, msg='用户不存在'))
@@ -124,6 +115,6 @@ class UserViewSet(viewsets.ModelViewSet):
 #     return dict
 
 
-def custom_page(request):
-    theads = ['1111', '2222', '3333', '4444']
-    return render(request, 'custom_page.html', {"theads": theads, "trows": []})
+
+
+
