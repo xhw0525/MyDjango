@@ -149,7 +149,7 @@ STATICFILES_FINDERS = (
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-
+    # 'DEFAULT_RENDERER_CLASSES' :('rest_framework.renderers.JSONRenderer',)
     # 'PAGE_SIZE': 10
 }
 # swagger 配置项
