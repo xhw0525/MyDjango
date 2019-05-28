@@ -25,9 +25,10 @@ import coreapi
 # @authentication_classes((SessionAuthentication, BasicAuthentication))
 # @permission_classes((IsAuthenticated,))
 def hello_world(request):
+    """哈哈 这个是方法注释"""
+
     print('------------->',request.data,request.get_raw_uri())
 
-    """哈哈 这个是方法注释"""
     return Response({"message": "Hello, world!%s"%(request.data.get('username',None)),})
 
 
