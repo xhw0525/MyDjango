@@ -1,4 +1,7 @@
 # MyDjango
+# 生成注释
+# apidoc -i ../myapp -o  ../static_root/docs
+
 
 # 新建项目
 # python manage.py startproject project_name

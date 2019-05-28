@@ -19,7 +19,6 @@ from django.conf.urls import url, include
 from rest_framework import routers
 from rest_framework.documentation import include_docs_urls
 from rest_framework.schemas import get_schema_view
-from rest_framework_swagger.renderers import SwaggerUIRenderer, OpenAPIRenderer
 
 router = routers.DefaultRouter()
 # router.register(r'users', views.UserViewSet) #集合视图使用这种路由
@@ -37,7 +36,7 @@ urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^hello_world$', views.hello_world, name='hello_world'),
 
-    url(r'^docs', get_schema_view(title='Users API', renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer]), name="docs"),
+    # url(r'^docs', get_schema_view(title='Users API', renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer]), name="docs"),
     # url(r'^docs/', include_docs_urls(title="myapp")),#这个自带的有bug
 
 

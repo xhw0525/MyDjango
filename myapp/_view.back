@@ -207,3 +207,25 @@ class api_view_demo(APIView):
 
 #--------------------------------------------------备份02结束
 
+
+#--------------------------------------------------备份03开始
+@api_view(['post'])
+@schema(ManualSchema(
+    fields=[
+        coreapi.Field(name="username", type='string', description='姓名', required=True),
+        coreapi.Field(name="age", type='integer', description='年龄'),
+        # location='query'加上后就拼接到了url上   #required=True 文档中当有location时才生效
+    ],
+    description="哈哈 这个是description备注",
+), )
+def hello_world(request):
+    """
+        哈哈 这个是方法注释
+    """
+    # 配schema后 这种注释就有可能 不会出现在接口文档里了
+    print('------------->', request.data, request.get_raw_uri())
+
+    return Response({"message": "Hello, %s!" % (request.data.get('username', None)), })
+
+
+#--------------------------------------------------备份03结束

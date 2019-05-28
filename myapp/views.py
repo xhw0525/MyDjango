@@ -12,24 +12,41 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action, api_view
 from myapp.serializers import MyUserModelSerializer
 from rest_framework.views import APIView
-from rest_framework.schemas import AutoSchema
+from rest_framework.schemas import AutoSchema, ManualSchema
+
 import coreapi
 
 
 @api_view(['post'])
-@schema(AutoSchema(manual_fields=[
-    #location='query'加上后就拼接到了url上   #required=True 文档中当有location时才生效
-    coreapi.Field(name="username", type='string', description='*姓名', required=True),
-    coreapi.Field(name="age",type='integer', description='年龄'),
-]))
-# @authentication_classes((SessionAuthentication, BasicAuthentication))
-# @permission_classes((IsAuthenticated,))
 def hello_world(request):
-    """哈哈 这个是方法注释"""
+    """
+    @api {POST} /hello_world/ 哈啊 apidoc 自动文档
+    @apiGroup xhw
+    @apiDescription 这里可以描述一下这个函数的具体操作
+        这一行也是可以描述的
 
-    print('------------->',request.data,request.get_raw_uri())
+    @apiParam {String} name 姓名
+    @apiParam {String} password 密码
 
-    return Response({"message": "Hello, world!%s"%(request.data.get('username',None)),})
+    @apiSuccess {Object} status 状态码
+    @apiSuccess {Object} msg 简略描述
+
+    @apiSuccessExample Response-Success:
+        HTTP 1.1/ 200K
+        {
+            'status': 0,
+            'msg': 'success'
+        }
+    @apiErrorExample Response-Fail:
+        HTTP 1.1/ 404K
+        {
+            'status': 1,
+            'msg': 'Fail'
+        }
+    """
+    print('------------->', request.data, request.get_raw_uri())
+
+    return Response({'status': 0, "msg": "Hello, %s!" % (request.data.get('username', None)), })
 
 
 # 以下为非restframwork内容
