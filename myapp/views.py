@@ -21,7 +21,7 @@ import coreapi
 def hello_world(request):
     """
     @api {POST} /hello_world/ 哈啊 apidoc 自动文档
-    @apiGroup xhw
+    @apiGroup LoginModule
     @apiDescription 这里可以描述一下这个函数的具体操作
         这一行也是可以描述的
 
@@ -32,13 +32,11 @@ def hello_world(request):
     @apiSuccess {Object} msg 简略描述
 
     @apiSuccessExample Response-Success:
-        HTTP 1.1/ 200K
         {
             'status': 0,
             'msg': 'success'
         }
     @apiErrorExample Response-Fail:
-        HTTP 1.1/ 404K
         {
             'status': 1,
             'msg': 'Fail'

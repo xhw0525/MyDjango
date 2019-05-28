@@ -2,6 +2,8 @@
 # 生成注释
 # apidoc -i ../myapp -o  ../static_root/docs
 
+# 只能先-o到static目录 然后 collectstatic 到static_root目录 不然django自带服务器会404
+
 
 # 新建项目
 # python manage.py startproject project_name
