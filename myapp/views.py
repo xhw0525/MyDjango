@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http.response import HttpResponse
 from django.views.decorators.http import require_http_methods
 from django.forms.models import model_to_dict
+from tools.siger import check_siger
 
 
 @require_http_methods(["POST"])
@@ -39,7 +40,7 @@ def hello_world(request):
 
 
 # 其他页面返回的东西
-@require_http_methods(["GET"])
+@check_siger
 def hello(request):
     users = MyUserModel.objects.filter(username='123')
     data: set = model_to_dict(users.first())
