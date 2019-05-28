@@ -12,7 +12,7 @@ class MyUserModelAdmin(admin.ModelAdmin):
                     'status', 'ctime', 'mtime', 'activetime', 'is_service', 'isok']
 
     # 列表点进去后的编辑内容; 还可以多个字段显示在一行。
-    fields = ['username', 'phone', ('sex', 'signature'), ]
+    fields = ['username', 'phone', ('sex', 'signature'), 'activetime']
 
     # 列表 直接激活编辑
     list_editable = ['activetime', ]

@@ -1,23 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-from rest_framework.decorators import schema
-from rest_framework.decorators import permission_classes
-from rest_framework.parsers import JSONParser
 from myapp.models import MyUserModel
 from django.shortcuts import render
-from rest_framework import viewsets, status
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import action, api_view
-from myapp.serializers import MyUserModelSerializer
-from rest_framework.views import APIView
-from rest_framework.schemas import AutoSchema, ManualSchema
-
-import coreapi
+from django.http.response import HttpResponse
+from django.views.decorators.http import require_http_methods
+from django.forms.models import model_to_dict
 
 
-@api_view(['post'])
+@require_http_methods(["POST"])
 def hello_world(request):
     """
     @api {POST} /hello_world/ 哈啊 apidoc 自动文档
@@ -44,12 +34,17 @@ def hello_world(request):
     """
     print('------------->', request.data, request.get_raw_uri())
 
-    return Response({'status': 0, "msg": "Hello, %s!" % (request.data.get('username', None)), })
+    return HttpResponse({'status': 0, "msg": "Hello, %s!" % (request.data.get('username', None)), })
+    return HttpResponse('123')
 
 
-# 以下为非restframwork内容
 # 其他页面返回的东西
+@require_http_methods(["GET"])
 def hello(request):
+    users = MyUserModel.objects.filter(username='123')
+    data: set = model_to_dict(users.first())
+    print('------------->', data)
+
     return render(request, 'hello.html', {'nihao': '你好啊啊啊' + "aaa"})
 
 

@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'wechat',
-    'rest_framework',
+    # 'rest_framework',
     # 'rest_framework_swagger',
 ]
 
@@ -147,13 +147,14 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
-    # 'DEFAULT_RENDERER_CLASSES' :('rest_framework.renderers.JSONRenderer',)
-    # 'PAGE_SIZE': 10
-}
+# #不习惯REST_FRAMEWORK 还是使用传统api接口吧
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+#     # 'DEFAULT_RENDERER_CLASSES' :('rest_framework.renderers.JSONRenderer',)
+#     # 'PAGE_SIZE': 10
+# }
 
-
+# #不习惯swagger 还是使用apidoc吧
 # # swagger 配置项
 # SWAGGER_SETTINGS = {
 #     # 基础样式
