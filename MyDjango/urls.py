@@ -36,7 +36,7 @@ admin.site.index_title = 'MD后台产品管理'
 
 
 urlpatterns = [
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     url(r'^admin/', admin.site.urls),
     url(r'^app/', include('myapp.urls')),
