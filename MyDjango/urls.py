@@ -24,19 +24,8 @@ from django.contrib import admin
 from myapp.views import hello
 
 
-admin.site.site_title = 'MD后台管理系统'
-# # 放在每个管理页面末尾的<title>，默认情况下是“Django站点管理员”
-admin.site.site_header = 'MD后台管理系统'
-# # 放在每个管理页面顶部的<h1>文本，默认情况下是“Django管理”
-admin.site.index_title = 'MD后台产品管理'
-
-# 管理员索引页面顶部的文本，默认情况下是“站点管理”
-# admin.site.site_url = ''
-# 管理页面顶部“查看网站”链接的URL，默认情况下是/，将其设置None将删除链接
-
-
 urlpatterns = [
-    # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     url(r'^admin/', admin.site.urls),
     url(r'^app/', include('myapp.urls')),

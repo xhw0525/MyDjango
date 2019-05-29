@@ -1,0 +1,232 @@
+# # -*- coding: utf-8 -*-
+# from __future__ import unicode_literals
+#
+# import json
+# from django.http import HttpResponse
+# from myapp.models import MyUserModel
+# from django.views.decorators.csrf import csrf_exempt
+# from django.shortcuts import render
+# from myapp.serializers import MyUserModelSerializer
+# from rest_framework import viewsets, status
+#
+# # 添加用户
+# @csrf_exempt
+# def adduser(request):
+#     json_data = formatRequestJson(request)
+#
+#     username = json_data.get('username')
+#     password = json_data.get('password')
+#     phone = json_data.get('phone')
+#     sex = json_data.get('sex')
+#     signature = json_data.get('signature')
+#     nickname = json_data.get('nickname')
+#     if username is None:
+#         return HttpResponse(formatResponseJson(state=2, msg='用户名为空'))
+#     print(username, password, phone, sex, signature, nickname)
+#     user = None
+#     users = MyUserModel.objects.filter(username=username)
+#     if len(users) > 0:
+#         return HttpResponse(formatResponseJson(state=2, msg='用户已存在'))
+#     else:
+#         user = MyUserModel()
+#
+#     user.username = username
+#     user.password = password
+#     user.phone = phone
+#     user.sex = sex
+#     user.signature = signature
+#     user.nickname = nickname
+#
+#     user.save()
+#
+#     return HttpResponse(formatResponseJson(msg='保存成功'))
+#
+#
+# # 更新用户
+# @csrf_exempt
+# def updateuser(request):
+#     json_data = formatRequestJson(request)
+#
+#     username = json_data['username']
+#
+#     if username is None:
+#         return HttpResponse(formatResponseJson(state=2, msg='用户名为空'))
+#
+#     users = MyUserModel.objects.filter(username=username)
+#
+#     if len(users) == 0:
+#         return HttpResponse(formatResponseJson(state=2, msg='用户不存在'))
+#
+#     user: MyUserModel = users.first()
+#
+#     for parm in json_data:
+#         setattr(user, parm, json_data[parm])
+#
+#     user.save()
+#
+#     return HttpResponse(formatResponseJson(msg='保存成功'))
+#
+#
+# # 查询用户
+# @csrf_exempt
+# def getuser(request):
+#     json_data = formatRequestJson(request)
+#
+#     username = json_data['username']
+#
+#     if username is None:
+#         return HttpResponse(formatResponseJson(state=2, msg='用户名为空'))
+#
+#     users = MyUserModel.objects.filter(username=username)
+#
+#     if len(users) == 0:
+#         return HttpResponse(formatResponseJson(state=2, msg='用户不存在'))
+#
+#     return HttpResponse(formatResponseJson(data=users.first()))
+#
+#
+# def formatResponseJson(msg='success', state=0, data=''):
+#     mainDic = {'msg': msg, 'state': state, 'data': convert_to_dicts(data)}
+#
+#     return json.dumps(mainDic, ensure_ascii=False)
+#
+#
+# def formatRequestJson(request):
+#     json_data = {}
+#     if request.method == 'POST':
+#         # 得到的是一个二进制数据
+#         json_str = request.body
+#         # print(json_str)  # b'{\n    "f":200,\n    "d":300\n    \n}'\
+#         # 对二进制数据进行解码,解码得到json数据
+#         json_str = json_str.decode()
+#         # print(json_str)  # {"f":200,"d":300}
+#         # 将json数据转化成字典形式
+#         json_data = json.loads(json_str)
+#         # print(json_data)
+#
+#     return json_data
+#
+#
+# # 参考方法1： 简单版本
+# def convert_to_dicts(objc):
+#     dict = {}
+#     dict.update(objc.__dict__)
+#     dict.pop("_state", None)  # 去除掉多余的字段
+#     return dict
+
+#--------------------------------------------------备份02开始
+
+from rest_framework.decorators import schema
+from rest_framework.decorators import permission_classes
+from rest_framework.parsers import JSONParser
+from myapp.models import MyUserModel
+from django.shortcuts import render
+from rest_framework import viewsets, status
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import action, api_view
+from myapp.serializers import MyUserModelSerializer
+from rest_framework.views import APIView
+from rest_framework.schemas import AutoSchema
+import coreapi
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+        API端：允许查看和编辑用户
+        retrieve:
+            Return a user instance.
+
+        list:
+            Return all users, ordered by most recently joined.
+
+        create:
+            Create a new user.
+
+        delete:
+            Remove an existing user.
+
+        partial_update:
+            Update one or more fields on an existing user.
+
+        update:
+            Up
+    """
+    queryset = MyUserModel.objects.all().order_by('-ctime')
+    serializer_class = MyUserModelSerializer
+    parser_classes = (JSONParser,)
+
+    # def get_permissions(self):
+    #     if self.action in ('create',):
+    #         self.permission_classes = [IsAuthenticated]
+    #     return [permission() for permission in self.permission_classes]
+
+
+    #下面的方法有错误 仅仅可以参考结构,
+    # def list(self, request, **kwargs):
+    #     users = MyUserModel.objects.all()
+    #     serializer = MyUserModelSerializer(users, many=True)
+    #     return Response(serializer., status=status.HTTP_200_OK)
+    #
+    # @permission_classes(IsAuthenticated, )
+    # def create(self, request, **kwargs):
+    #     name = request.data.get('username')
+    #     serializer = MyUserModelSerializer(data=request.data)
+    #     print('------name--------------->', name)
+    #     jsondata = None
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         jsondata = serializer.validated_data
+    #     print('--------------------->', jsondata)
+    #     return Response(jsondata, status=status.HTTP_201_CREATED)
+
+    # @action(detail=False, methods=['post', ], )
+    # def getforusername(self, request, pk=None):
+    #     name = request.data.get('name', None)
+    #     if name:
+    #         users = MyUserModel.objects.filter(username=name).first()
+    #     return Response(users, status=status.HTTP_200_OK)
+
+
+class api_view_demo(APIView):
+    schema = AutoSchema(manual_fields=[
+        coreapi.Field(name="username", required=False, location="query", description="介绍出不来啊"),
+        coreapi.Field(name="phone", required=False, location="query", description="介绍出不来啊"),
+    ])
+
+    @action(detail=False, )
+    def get(self, request, *args, **kwargs):
+        """
+        发送信息到指定人员邮箱\r\n
+        参数列表：\r\n
+            from_email： 发件人邮箱\r\n
+            to_email: 收件人，多个收件人请使用英文逗号分隔隔开\r\n
+            subject: 邮件主题\r\n
+            message: 邮件正文\r\n
+        """
+        return Response('get请求')
+
+#--------------------------------------------------备份02结束
+
+
+#--------------------------------------------------备份03开始
+@api_view(['post'])
+@schema(ManualSchema(
+    fields=[
+        coreapi.Field(name="username", type='string', description='姓名', required=True),
+        coreapi.Field(name="age", type='integer', description='年龄'),
+        # location='query'加上后就拼接到了url上   #required=True 文档中当有location时才生效
+    ],
+    description="哈哈 这个是description备注",
+), )
+def hello_world(request):
+    """
+        哈哈 这个是方法注释
+    """
+    # 配schema后 这种注释就有可能 不会出现在接口文档里了
+    print('------------->', request.data, request.get_raw_uri())
+
+    return Response({"message": "Hello, %s!" % (request.data.get('username', None)), })
+
+
+    #--------------------------------------------------备份03结束
+No newline at end of file

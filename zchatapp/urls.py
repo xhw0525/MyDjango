@@ -34,7 +34,7 @@ urlpatterns = [
 
 
     # url(r'^', include(router.urls)),
-    url(r'^adduser', views.adduser, name='adduser'),
+    url(r'^hello_world$', views.hello_world, name='hello_world'),
 
     # url(r'^docs', get_schema_view(title='Users API', renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer]), name="docs"),
     # url(r'^docs/', include_docs_urls(title="myapp")),#这个自带的有bug

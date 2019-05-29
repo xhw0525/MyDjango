@@ -2,14 +2,16 @@
 from __future__ import unicode_literals
 from myapp.models import MyUserModel
 from django.shortcuts import render
-from django.http.response import HttpResponse
 from django.views.decorators.http import require_http_methods
 from django.forms.models import model_to_dict
 from tools.siger import check_siger
+from tools.fomats import format_response_json
+from rest_framework.decorators import api_view, renderer_classes
+from rest_framework.response import Response
 
 
-@require_http_methods(["POST"])
-def hello_world(request):
+@api_view(http_method_names=['post'])
+def adduser(request):
     """
     @api {POST} /hello_world/ 哈啊 apidoc 自动文档
     @apiGroup LoginModule
@@ -19,24 +21,47 @@ def hello_world(request):
     @apiParam {String} name 姓名
     @apiParam {String} password 密码
 
-    @apiSuccess {Object} status 状态码
-    @apiSuccess {Object} msg 简略描述
+    @apiSuccess {integer} status 状态码
+    @apiSuccess {String} msg 简略描述
+    @apiSuccess {Object} data 附加信息
 
     @apiSuccessExample Response-Success:
         {
             'status': 0,
             'msg': 'success'
+            'data': '附加信息'
         }
     @apiErrorExample Response-Fail:
         {
             'status': 1,
             'msg': 'Fail'
+            'data': '附加信息'
         }
     """
-    print('------------->', request.data, request.get_raw_uri())
 
-    return HttpResponse({'status': 0, "msg": "Hello, %s!" % (request.data.get('username', None)), })
-    return HttpResponse('123')
+    json_data = request.data
+    username = json_data.get('username')
+    password = json_data.get('password')
+    phone = json_data.get('phone')
+    sex = json_data.get('sex')
+    signature = json_data.get('signature')
+    nickname = json_data.get('nickname')
+    if username is None:
+        return Response(format_response_json(state=2, msg='用户名为空'))
+
+    users = MyUserModel.objects.filter(username=username)
+    if len(users) > 0:
+        return Response(format_response_json(state=2, msg='用户已存在'))
+    else:
+        user = MyUserModel()
+        user.username = username
+        user.password = password
+        user.phone = phone
+        user.sex = sex
+        user.signature = signature
+        user.nickname = nickname
+        user.save()
+        return Response(format_response_json(msg='保存成功'))
 
 
 # 其他页面返回的东西
