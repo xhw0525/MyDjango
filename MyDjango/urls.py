@@ -29,6 +29,7 @@ urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
     url(r'^app/', include('myapp.urls')),
+    url(r'^chat/', include('zchatapp.urls')),
     # url(r'^wx/', include('wechat.urls',namespace="wechat")),
     url('^.*', hello, name=''),
     # 这样加静态路径后自带服务器调试时   浏览器可以直接访问静态路径下的资源 仅限(CSS, JavaScript, Images) //建议使用下面+号拼接的方式
