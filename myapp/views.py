@@ -43,8 +43,9 @@ def hello_world(request):
 @check_siger
 def hello(request):
     users = MyUserModel.objects.filter(username='123')
-    data: set = model_to_dict(users.first())
-    print('------------->', data)
+    if len(users) > 0:
+        data: set = model_to_dict(users.first())
+        print('------------->', data)
 
     return render(request, 'hello.html', {'nihao': '你好啊啊啊' + "aaa"})
 
