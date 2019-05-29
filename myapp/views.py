@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.forms.models import model_to_dict
 from tools.siger import check_siger
-from tools.fomats import format_response_json
+from tools.fomats import format_response_json, set_params_to_model
 from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.response import Response
 
@@ -41,11 +41,6 @@ def adduser(request):
 
     json_data = request.data
     username = json_data.get('username')
-    password = json_data.get('password')
-    phone = json_data.get('phone')
-    sex = json_data.get('sex')
-    signature = json_data.get('signature')
-    nickname = json_data.get('nickname')
     if username is None:
         return Response(format_response_json(state=2, msg='用户名为空'))
 
@@ -54,12 +49,7 @@ def adduser(request):
         return Response(format_response_json(state=2, msg='用户已存在'))
     else:
         user = MyUserModel()
-        user.username = username
-        user.password = password
-        user.phone = phone
-        user.sex = sex
-        user.signature = signature
-        user.nickname = nickname
+        set_params_to_model(json_dic=json_data, model=user)
         user.save()
         return Response(format_response_json(msg='保存成功'))
 
