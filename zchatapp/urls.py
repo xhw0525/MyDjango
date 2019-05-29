@@ -14,30 +14,15 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-import myapp.views as views
+import zchatapp.views as views
 from django.conf.urls import url, include
-# from rest_framework import routers
-# from rest_framework.documentation import include_docs_urls
-# from rest_framework.schemas import get_schema_view
-
-# router = routers.DefaultRouter()
-# router.register(r'users', views.UserViewSet) #集合视图使用这种路由
 
 
 # 使用自动化URL路由，转配我们的API.
 # 如有额外需要, 我也为可视化API添加了登陆URLs.
 urlpatterns = [
-    # url(r'^adduser$', views.adduser, name='adduser'),
-    # url(r'^updateuser$', views.updateuser, name='updateuser'),
-    # url(r'^getuser$', views.getuser, name='getuser'),
-    # url(r'^api_view_demo$', views.api_view_demo.as_view()),
+    url(r'^adduser$', views.adduser, name='adduser'),
 
-
-    # url(r'^', include(router.urls)),
-    url(r'^hello_world$', views.hello_world, name='hello_world'),
-
-    # url(r'^docs', get_schema_view(title='Users API', renderer_classes=[OpenAPIRenderer, SwaggerUIRenderer]), name="docs"),
-    # url(r'^docs/', include_docs_urls(title="myapp")),#这个自带的有bug
 
 
 ]
