@@ -25,8 +25,7 @@ server {
 
 #MyDjango
 server {
-    listen 80;
-    listen [::]:443;
+    listen 10041;
     charset utf-8;
     server_name localhost;
     
@@ -37,17 +36,17 @@ server {
 
     location / {
         include uwsgi_params;
-        uwsgi_pass 127.0.0.1:8001;
+        uwsgi_pass 127.0.0.1:8000;
         uwsgi_read_timeout 5;
     }
     location /static {
         expires 30d;
         autoindex on;
         add_header Cache-Control private;
-        alias /home/uxhw/MyDjango/static_root/;
+        alias /home/uxhw/works/ZChatProject/public/static_root/;
      }
     location /media {
-        alias /home/uxhw/MyDjango/media/;
+        alias /home/uxhw/works/ZChatProject/public/media/;
     }
 }
 

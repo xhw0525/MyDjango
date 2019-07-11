@@ -6,7 +6,7 @@
 
 
 # 新建项目
-# python manage.py startproject project_name
+# django-admin startproject project_name
 
 # 新建app
 # python manage.py startapp app_name
