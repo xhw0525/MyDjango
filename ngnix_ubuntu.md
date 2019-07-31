@@ -43,10 +43,10 @@ server {
         expires 30d;
         autoindex on;
         add_header Cache-Control private;
-        alias /home/uxhw/works/ZChatProject/public/static_root/;
+        alias /home/uxhw/works/MyDjango/public/static_root/;
      }
     location /media {
-        alias /home/uxhw/works/ZChatProject/public/media/;
+        alias /home/uxhw/works/MyDjango/public/media/;
     }
 }
 

@@ -1,0 +1,33 @@
+{
+    "python.pythonPath": "/Users/xhw/PythonV/bin/python",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintArgs": [
+        "--generate-members",
+        "--load-plugins"
+    ],
+    "python.autoComplete.extraPaths": [
+        "/Users/xhw/PythonV/lib/python3.7/site-packages"
+    ],
+    "python.formatting.provider": "yapf",
+    "files.exclude": {
+        "**/.idea": true,
+        "**/build": true,
+        "**/.gitignore": true,
+        "**/.metadata": true,
+        "**/.packages": true,
+        "**/.flutter-plugins": true,
+        "**/pubspec.lock": true,
+        "**/*.iml": true,
+        "**/.android": true,
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/__init*": true,
+        "**/__pycache__": true,
+        "*.pyc": true,
+
+    },
+}

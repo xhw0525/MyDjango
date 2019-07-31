@@ -4,4 +4,4 @@ from django.apps import AppConfig
 
 class ZchatappConfig(AppConfig):
     name = 'zchatapp'
-    verbose_name = '小马Chat管理'  # app显示中文
+    verbose_name = '小马Chat用户管理'  # app显示中文

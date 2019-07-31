@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# from __future__ import unicode_literals
+#from __future__ import *
 from django.contrib import admin
 from myapp.models import *
 from myapp.views import custom_page
