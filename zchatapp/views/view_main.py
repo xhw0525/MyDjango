@@ -1,34 +1,15 @@
 # -*- coding: utf-8 -*-
-from zchatapp.models import ZUserModel, ZAutoReplyModel
-from django.shortcuts import render
-from django.views.decorators.http import require_http_methods
-from django.forms.models import model_to_dict
-
-from tools.fomats import format_response_json, set_user_params, user_to_dict
-from rest_framework.decorators import api_view, renderer_classes
-from rest_framework.response import Response
-from django.http.response import HttpResponse, JsonResponse
-from django.http.request import HttpRequest
-from django.db.models.query import QuerySet
-from rest_framework.request import Request
-from rest_framework.parsers import BaseParser
-from rest_framework.decorators import parser_classes
-from django.views.decorators.csrf import csrf_exempt  # 不进行csrf验证
-
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
-from django.views.decorators.csrf import csrf_exempt
 import os
-import MyDjango.settings as ZSetting
-import _md5
-from django.views.decorators.csrf import csrf_exempt
-import csv
-from django.http import HttpResponse
-import datetime
-import os
+
 import xlwt
-from django.http import StreamingHttpResponse
-import MyDjango.settings as ZSetting
+from django.db.models.query import QuerySet
+from django.http import HttpResponse
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from tools.fomats import format_response_json, user_to_dict
+from zchatapp.models import ZUserModel, ZAutoReplyModel
+
 
 def index(request):
     return HttpResponse('index')

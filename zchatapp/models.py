@@ -65,11 +65,11 @@ class ZAutoReplyModel(models.Model):
     #     return 'ok'
     #
 
-# class CustomPageView(models.Model):  # 无用模型 只是为了admin中跳转到自定义界面
-#     class Meta:
-#         verbose_name = '导出所有用户数据'
-#         verbose_name_plural = verbose_name
-#
-#     # name = models.CharField('名称', max_length=50, blank=True)  # string	用户名
-#
-#     pass
+class CustomPageView(models.Model):  # 无用模型 只是为了admin中跳转到自定义界面
+    class Meta:
+        verbose_name = '导出所有用户数据'
+        verbose_name_plural = verbose_name
+
+    # name = models.CharField('名称', max_length=50, blank=True)  # string	用户名
+
+    pass

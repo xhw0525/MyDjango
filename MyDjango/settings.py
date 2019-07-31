@@ -32,6 +32,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'simpleui',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,9 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'wechat',
-    'zchatapp'
+    'zchatapp',
+
     # 'rest_framework',
-    # 'rest_framework_swagger',
+    'rest_framework.authtoken',
+    # ...
+    # 'debug_toolbar',# debug_toolbar配置 01
 ]
 
 MIDDLEWARE = [
@@ -53,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',  # debug_toolbar配置 02
 ]
 
 ROOT_URLCONF = 'MyDjango.urls'
@@ -61,7 +67,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'public', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -116,7 +122,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False  # 若为true 服务器存储的时间永远是utc时间
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -128,20 +134,17 @@ STATIC_URL = '/static/'  # html中引用时 用到此url
 # 当运行 python manage.py collectstatic 的时候
 # STATIC_ROOT 文件夹 是用来将所有STATICFILES_DIRS中所有文件夹中的文件，以及各app中static中的文件都复制过来
 # 把这些文件放到一起是为了用apache等部署的时候更方便
-STATIC_ROOT = os.path.join(BASE_DIR, "static_root")  # uwign时使用的是STATIC_ROOT; 自带服务器使用的是STATICFILES_DIRS
-
-# 其它 存放静态文件的文件夹，可以用来存放项目中公用的静态文件，里面不能包含 STATIC_ROOT
-# 如果不想用 STATICFILES_DIRS 可以不用，都放在 app 里的 static 中也可以
+STATIC_ROOT = os.path.join(BASE_DIR, 'public', 'static_root')
 
 #   运行前要先收集静态文件 python manage.py collectstatic
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),  # 声明静态文件 文件夹位置
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "public", "static"),  # 声明静态文件 文件夹位置
                     # os.path.join(BASE_DIR, "media1"),
                     # os.path.join(BASE_DIR,"myapp", "static1"),
                     # os.path.join(BASE_DIR, "static_files"),
                     ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'public', 'media')
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -150,32 +153,16 @@ STATICFILES_FINDERS = (
 
 # #不习惯REST_FRAMEWORK 还是使用传统api接口吧
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     # 'DEFAULT_RENDERER_CLASSES' :('rest_framework.renderers.JSONRenderer',)
     # 'PAGE_SIZE': 10
+
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_framework.authentication.BasicAuthentication',
+    #     'rest_framework.authentication.TokenAuthentication',
+    #     'rest_framework.authentication.SessionAuthentication',
+    # ),
 }
 
-# #不习惯swagger 还是使用apidoc吧
-# # swagger 配置项
-# SWAGGER_SETTINGS = {
-#     # 基础样式
-#     'SECURITY_DEFINITIONS': {
-#         "basic":{
-#             'type': 'basic'
-#         }
-#     },
-#     # 如果需要登录才能够查看接口文档, 登录的链接使用restframework自带的.
-#     'LOGIN_URL': 'rest_framework:login',
-#     'LOGOUT_URL': 'rest_framework:logout',
-#     # 'DOC_EXPANSION': None,
-#     # 'SHOW_REQUEST_HEADERS':True,
-#     # 'USE_SESSION_AUTH': True,
-#     # 'DOC_EXPANSION': 'list',
-#     # 接口文档中方法列表以首字母升序排列
-#     'APIS_SORTER': 'alpha',
-#     # 如果支持json提交, 则接口文档中包含json输入框
-#     'JSON_EDITOR': True,
-#     # 方法列表字母排序
-#     'OPERATIONS_SORTER': 'alpha',
-#     'VALIDATOR_URL': None,
-# }
+# debug_toolbar配置 03
+# DEBUG_TOOLBAR_CONFIG = {"SHOW_TOOLBAR_CALLBACK": lambda request: DEBUG, }

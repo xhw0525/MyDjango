@@ -5,11 +5,11 @@ from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.forms.models import model_to_dict
 from tools.siger import check_siger
-from tools.fomats import format_response_json, set_params_to_model
+from tools.fomats import format_response_json
 from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.response import Response
-from dwebsocket import require_websocket,accept_websocket
-import dwebsocket
+# from dwebsocket import require_websocket,accept_websocket
+# import dwebsocket
 
 @api_view(http_method_names=['post'])
 def adduser(request):

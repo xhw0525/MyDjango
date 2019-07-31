@@ -1,34 +1,21 @@
 # -*- coding: utf-8 -*-
 # coding: utf-8
-from zchatapp.models import ZUserModel, ZBeiZhuModel, ZAutoReplyModel
-from django.shortcuts import render
-from django.views.decorators.http import require_http_methods
-from django.forms.models import model_to_dict
-
-from akuozhan.chat_manager import ChatManager
-from tools.fomats import format_response_json, set_user_params, user_to_dict
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from rest_framework.response import Response
-from django.http.response import HttpResponse, JsonResponse
-from django.http.request import HttpRequest
-from django.db.models.query import QuerySet, Q
-from django.http import QueryDict
-from akuozhan.smss_manager import SMSSManager
-import time
-
-from rest_framework.request import Request
-from rest_framework.parsers import BaseParser
-from rest_framework.decorators import parser_classes
-from django.views.decorators.csrf import csrf_exempt  # 不进行csrf验证
-
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
-from django.views.decorators.csrf import csrf_exempt
-import os
-import MyDjango.settings as ZSetting
-import _md5
-import json
 import datetime
+import json
+import os
+
+from django.db.models.query import QuerySet
+from django.http import QueryDict
+from django.http.request import HttpRequest
+from django.http.response import JsonResponse
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+import MyDjango.settings as ZSetting
+from akuozhan.chat_manager import ChatManager
+from akuozhan.smss_manager import SMSSManager
+from tools.fomats import format_response_json, set_user_params, user_to_dict
+from zchatapp.models import ZUserModel, ZBeiZhuModel, ZAutoReplyModel
 
 
 @api_view(['post'])

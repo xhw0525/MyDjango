@@ -1,0 +1,6 @@
+Django==1.11.20
+django-simpleui==2.1.1
+djangorestframework==3.9.4
+Pillow==6.0.0
+pytz==2019.1
+uWSGI==2.0.18
