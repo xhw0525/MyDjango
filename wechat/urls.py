@@ -18,7 +18,7 @@ from django.conf.urls import url
 from django.conf.urls import url, include
 from django.contrib import admin
 import os
-import views
+import wechat.views as views
 
 app_name = 'wechat'
 
