@@ -1,13 +1,5 @@
 ##
 
-#鑫彩
-server {
-    listen  80;
-    server_name www.letgotry.site letgotry.site ;
-    root /home/uxhw/xinload;
-	index index.html;
-
-}
 
 #默认
 server {
@@ -21,33 +13,53 @@ server {
 	}
 }
 
+#鑫彩
+server {
+    listen  80;
+    server_name www.letgotry.site letgotry.site ;
+    root /home/uxhw/xinload;
+    index index.html;
+
+}
 
 
 #MyDjango
 server {
-    listen 10041;
-    charset utf-8;
-    server_name localhost;
-    
-    access_log      /home/uxhw/log/nginx_MyDjango_access.log;
-    error_log       /home/uxhw/log/nginx_MyDjango_error.log;
+        listen       80;
+        server_name  chat.hw-x.top;
 
-    client_max_body_size 75M;
+        #charset koi8-r;
+        charset utf-8;
 
-    location / {
-        include uwsgi_params;
-        uwsgi_pass 127.0.0.1:8000;
-        uwsgi_read_timeout 5;
-    }
-    location /static {
-        expires 30d;
-        autoindex on;
-        add_header Cache-Control private;
-        alias /home/uxhw/works/MyDjango/public/static_root/;
-     }
-    location /media {
-        alias /home/uxhw/works/MyDjango/public/media/;
-    }
+        #access_log  logs/host.access.log  main;
+        access_log      /home/uxhw/logs/nginx_MyDjango_access.log;
+        error_log       /home/uxhw/logs/nginx_MyDjango_error.log;
+
+        location / {
+            # root   html;
+            # index  index.html index.htm;
+            include uwsgi_params;
+            uwsgi_pass 127.0.0.1:1801;
+            uwsgi_read_timeout 5;
+        }
+        location /static {
+            expires 30d;
+            autoindex on;
+            add_header Cache-Control private;
+            alias /home/uxhw/works/ZChatProject/public/static_root/;
+        }
+        location /media {
+            alias /home/uxhw/works/ZChatProject/public/media/;
+        }
+        #error_page  404              /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        #
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+
 }
 
 #gogs
@@ -63,6 +75,18 @@ server {
     }
 }
 
+#反向代理
+server {
+        listen 80;
+        server_name git.hw-x.top;
+        location / {
+                proxy_pass http://127.0.0.1:6300;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+        }
+}
 
 ################################################以下是试例
 
